@@ -1,0 +1,12 @@
+{% extends "poll/base.html" %} {% block content %}
+<div class="form-container">
+  <h2>Đăng ký tài khoản</h2>
+  <form method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Đăng ký</button>
+  </form>
+  <p style="margin-top: 15px">
+    Đã có tài khoản? <a href="/admin/">Đăng nhập qua Admin</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Poll Application</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <style>
+      .navbar-default,
+      .btn,
+      .form-control,
+      .panel {
+        border-radius: 0;
+      }
+      .navbar-default {
+        background-color: rgba(245, 245, 220, 0.7);
+        border-color: rgba(245, 245, 220, 0.6);
+        box-shadow: 0px 3px 3px 0px #ddd;
+      }
+      .panel-default > .panel-heading {
+        color: #333;
+        background-color: rgba(245, 245, 220, 0.7);
+        border-color: rgba(245, 245, 220, 0.6);
+      }
+      .panel-footer {
+        background-color: rgba(245, 245, 220, 0.5);
+        border-color: rgba(245, 245, 220, 0.4);
+      }
+      .panel {
+        box-shadow: 0px 3px 3px 0px #ddd;
+      }
+      a.navbar-brand,
+      .panel-title {
+        font-weight: bolder;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'home' %}">Poll Application</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'create' %}">Create</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Available Polls</h3>
+            </div>
+            <ul class="list-group">
+              {% for poll in polls %}
+              <li class="list-group-item">
+                <strong>{{ poll.question }}</strong>
+                <span class="pull-right">
+                  <a href="{% url 'vote' poll.id %}" class="btn btn-info btn-xs"
+                    >Vote</a
+                  >
+                  &nbsp;
+                  <a
+                    href="{% url 'results' poll.id %}"
+                    class="btn btn-default btn-xs"
+                    >View Results</a
+                  >
+                  &nbsp;
+                </span>
+              </li>
+              {% empty %}
+              <li class="list-group-item">
+                Chưa có bình chọn nào. Hãy bấm
+                <a href="{% url 'create' %}"><strong>Create</strong></a> để tạo
+                mới!
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

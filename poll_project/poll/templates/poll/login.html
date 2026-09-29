@@ -1,0 +1,40 @@
+{% extends "poll/base.html" %}
+
+{% block title %}Đăng nhập{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Đăng nhập</h3>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="panel-body">
+
+                    {% for key, value in form.errors.items %}
+                        <p class="text-danger">{{ value }}</p>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <label for="id_username">Tài khoản</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password">Mật khẩu</label>
+                        {{ form.password }}
+                    </div>
+
+                    <input type="hidden" name="next" value="/" />
+
+                    <button type="submit" class="btn btn-info">Đăng nhập</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
